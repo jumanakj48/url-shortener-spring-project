@@ -1,83 +1,96 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { IoIosMenu } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
+import { useStoreContext } from "../contextApi/ContextApi";
 
-const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
 
-  const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/dashboard", label: "Dashboard" },
-  ];
+const Navbar = () => {
+  const navigate = useNavigate();
+  const { token, setToken } = useStoreContext();
+  const path = useLocation().pathname;
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
+  const onLogOutHandler = () => {
+    setToken(null);
+    localStorage.removeItem("JWT_TOKEN");
+    navigate("/login");
+  };
 
   return (
-    <nav className="bg-blue-600 text-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
-        {/* Logo */}
-        <Link to="/" className="font-bold text-2xl">
-          Linkify
+<div className="h-16 bg-gradient-to-r from-blue-500 via-blue-600 to-purple-700 z-50 flex items-center sticky top-0">
+      <div className="lg:px-14 sm:px-8 px-4 w-full flex justify-between">
+        <Link to="/">
+          <h1 className="font-bold text-3xl text-white italic sm:mt-0 mt-2">
+            Linkify
+          </h1>
         </Link>
-
-        {/* Hamburger for mobile */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="sm:hidden focus:outline-none"
-          aria-label="Toggle menu"
+        <ul
+          className={`flex sm:gap-10 gap-4 sm:items-center sm:mt-1 sm:pt-0 pt-3 text-slate-800 sm:static absolute left-0 top-[62px] sm:shadow-none shadow-md ${
+            navbarOpen ? "h-fit sm:pb-0 pb-5" : "h-0 overflow-hidden"
+          }  transition-all duration-100 sm:h-fit sm:bg-none  bg-custom-gradient sm:w-fit w-full sm:flex-row flex-col px-4 sm:px-0`}
         >
-          <div className="space-y-1">
-            <span className="block w-6 h-0.5 bg-white"></span>
-            <span className="block w-6 h-0.5 bg-white"></span>
-            <span className="block w-6 h-0.5 bg-white"></span>
-          </div>
+          <li className="hover:text-btnColor font-[500]  transition-all duration-150">
+            <Link
+              className={`${
+                path === "/" ? "text-white font-semibold" : "text-gray-200"
+              }`}
+              to="/"
+            >
+              Home
+            </Link>
+          </li>
+          <li className="hover:text-btnColor font-[500]  transition-all duration-150">
+            <Link
+              className={`${
+                path === "/about" ? "text-white font-semibold" : "text-gray-200"
+              }`}
+              to="/about"
+            >
+              About
+            </Link>
+          </li>
+          {token && (
+            <li className="hover:text-btnColor font-[500]  transition-all duration-150">
+            <Link
+              className={`${
+                path === "/dashboard" ? "text-white font-semibold" : "text-gray-200"
+              }`}
+              to="/dashboard"
+            >
+              Dashboard
+            </Link>
+          </li>
+          )}
+          {!token && (
+            <Link to="/register">
+              <li className=" sm:ml-0 -ml-1 bg-rose-700 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
+                SignUp
+              </li>
+            </Link>
+            )}
+
+          {token && (
+            <button
+             onClick={onLogOutHandler}
+             className="sm:ml-0 -ml-1 bg-rose-700 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
+              LogOut
+            </button>
+            )}
+        </ul>
+        <button
+          onClick={() => setNavbarOpen(!navbarOpen)}
+          className="sm:hidden flex items-center sm:mt-0 mt-2"
+        >
+          {navbarOpen ? (
+            <RxCross2 className="text-white text-3xl" />
+          ) : (
+            <IoIosMenu className="text-white text-3xl" />
+          )}
         </button>
-
-        {/* Desktop links */}
-        <ul className="hidden sm:flex space-x-6">
-          {navLinks.map(({ path, label }) => (
-            <li key={path}>
-              <Link
-                to={path}
-                className={`hover:text-yellow-300 ${
-                  location.pathname === path ? "underline" : ""
-                }`}
-              >
-                {label}
-              </Link>
-            </li>
-            
-          ))}
-          <li key="/register">
-  <Link
-    to="/register"
-    className="bg-red-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-red-700 transition duration-200"
-  >
-    Sign Up
-  </Link>
-</li>
-        </ul>
       </div>
-
-      {/* Mobile menu */}
-      {isOpen && (
-        <ul className="sm:hidden bg-blue-700 px-4 py-3 space-y-3">
-          {navLinks.map(({ path, label }) => (
-            <li key={path}>
-              <Link
-                to={path}
-                onClick={() => setIsOpen(false)}
-                className={`block hover:text-yellow-300 ${
-                  location.pathname === path ? "underline" : ""
-                }`}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </nav>
+    </div>
   );
 };
 
-export default NavBar;
+export default Navbar;

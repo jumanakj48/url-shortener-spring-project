@@ -1,12 +1,13 @@
 import React from "react";
 import Card from "./Card"; // Adjust the import path based on your folder structure
 import { useNavigate } from "react-router-dom";
-import { ContextApi } from "../contextApi/ContextApi";
+import { useStoreContext } from "../contextApi/ContextApi";
+import { createContext, useContext, useState } from "react";
 
 const LandingPage = () => {
 
     const navigate = useNavigate();
-    const {token} = useContext(ContextApi);
+    const { token } = useStoreContext();
     console.log("TOKEN FROM LANDING PAGE : " + token);
 
   return (
@@ -18,10 +19,10 @@ const LandingPage = () => {
           Shorten URLs. Track Every Click.
         </h1>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
-          Linklytics helps you create short links and monitor real-time analytics for smarter sharing.
+          Linkify helps you create short links and monitor real-time analytics for smarter sharing.
         </p>
         <a
-          href="/dashboard"
+          href="/login"
           className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition"
         >
           Get Started
@@ -52,7 +53,7 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="text-center py-6 text-sm text-gray-500 border-t">
-        &copy; {new Date().getFullYear()} Linklytics. All rights reserved.
+        &copy; {new Date().getFullYear()} Linkify. All rights reserved.
       </footer>
     </div>
   );

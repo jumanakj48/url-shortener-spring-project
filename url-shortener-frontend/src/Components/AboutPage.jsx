@@ -17,7 +17,7 @@ const AboutPage = () => {
           Empowering Smarter Sharing
         </h1>
         <p className="text-gray-600 text-base sm:text-lg mb-10 text-center max-w-3xl mx-auto">
-          At Linklytics, we make sharing smarter, faster, and more insightful.
+          At Linkify, we make sharing smarter, faster, and more insightful.
           Whether you're managing a campaign or simplifying everyday communication,
           our platform gives you the power to create, secure, and analyze your links effortlessly.
         </p>

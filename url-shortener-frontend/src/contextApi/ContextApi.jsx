@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
+import React from 'react';
 
-export const ContextApi = createContext();
+const ContextApi = createContext();
 
 export const ContextProvider = ({ children }) => {
     const getToken = localStorage.getItem("JWT_TOKEN")
@@ -18,7 +19,7 @@ export const ContextProvider = ({ children }) => {
 };
 
 
-// export const useStoreContext = () => {
-//     const context = useContext(ContextApi);
-//     return context;
-// }
+export const useStoreContext = () => {
+    const context = useContext(ContextApi);
+    return context;
+}
