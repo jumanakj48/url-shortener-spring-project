@@ -1,64 +1,72 @@
-# url-shortener-spring-project
+# URL Shortener Project
 
-Overview
-This is a full-stack URL shortener web application developed using React for the frontend and Spring Boot for the backend. The application allows users to create shortened URLs and track real-time analytics such as click counts, with interactive date filters and graphical visualizations. The system is designed with security, performance, and responsiveness in mind.
+## Overview
+This is a **full-stack URL shortener** web application developed using modern technologies.  
+It offers URL shortening services along with real-time click analytics, date filters, and interactive graph visualizations.
 
-Backend
-Developed using Spring Boot framework.
+- **Backend:** Spring Boot with REST APIs  
+- **Frontend:** React with Tailwind CSS and Material-UI (MUI)  
+- **Database:** PostgreSQL (hosted on Neon DB)  
+- **Deployment:** Backend deployed using Docker on Render, Frontend hosted on Netlify  
 
-Implements REST APIs to handle URL shortening, retrieval, and analytics.
+---
 
-Includes security features with Spring Security and JWT-based authentication.
+## Backend Details
 
-Data persistence is managed using Spring Data JPA with PostgreSQL as the database.
+### Technologies & Dependencies
 
-API testing and debugging done using Postman.
+| Dependency                        | Purpose                                  |
+|---------------------------------|------------------------------------------|
+| `spring-boot-starter-data-jpa`  | ORM & Database Management (JPA/Hibernate) |
+| `spring-boot-starter-security`  | Securing APIs with authentication          |
+| `spring-boot-starter-web`       | Building RESTful Web APIs                   |
+| `io.jsonwebtoken:jjwt`          | JWT token creation and validation           |
+| `org.postgresql:postgresql`     | PostgreSQL JDBC Driver                      |
+| `lombok`                       | Boilerplate code reduction (Getters, Setters, etc.) |
+| `spring-boot-starter-test`      | Unit and integration testing                |
+| `spring-security-test`           | Security-related testing utilities          |
 
-Key dependencies:
+### API Testing
+- Used **Postman** to test and validate all backend REST APIs during development.
 
-spring-boot-starter-data-jpa — For ORM and database interactions.
+---
 
-spring-boot-starter-security — For authentication and authorization.
+## Frontend Details
 
-spring-boot-starter-web — To build RESTful web services.
+### Technologies & Dependencies
 
-jjwt — To handle JSON Web Tokens (JWT) for secure communication.
+- **React 18** for UI development  
+- **Vite** as the build tool and development server  
+- **Tailwind CSS** for utility-first styling  
+- **Material-UI (MUI)** for pre-built React components  
+- **React Query** for efficient data fetching and caching  
+- **Axios** for making HTTP requests  
+- **React Router DOM** for client-side routing  
+- Additional utilities: `react-hook-form`, `react-hot-toast`, `react-icons`, `react-loader-spinner`
 
-postgresql driver — To connect with PostgreSQL database.
+### Scripts
 
-lombok — To reduce boilerplate code with annotations.
+| Script     | Description                     |
+|------------|--------------------------------|
+| `dev`      | Run development server (`vite`) |
+| `build`    | Build the production bundle      |
+| `lint`     | Run ESLint for code quality     |
+| `preview`  | Preview production build        |
 
-Testing dependencies for unit and security tests.
+---
 
-Frontend
-Built with React 18 using Vite as the build tool.
+## Deployment
 
-UI designed with Material-UI (MUI) components and Tailwind CSS for styling.
+- **Backend:** Packaged and containerized using **Docker**, deployed on **Render** cloud platform  
+- **Frontend:** Built with Vite and hosted on **Netlify**  
+- **Database:** Hosted on **Neon DB** (PostgreSQL cloud service)  
 
-State and asynchronous data management handled with React Query.
+---
 
-Uses popular libraries such as:
+## Features
 
-axios for API calls,
-
-react-chartjs-2 for interactive chart visualizations,
-
-react-hook-form for form management,
-
-react-hot-toast for notifications,
-
-react-router-dom for routing,
-
-framer-motion for smooth animations.
-
-Code quality maintained with ESLint and React hooks linting.
-
-Deployment
-Backend is containerized using Docker and deployed on Render web server.
-
-Frontend is deployed using Netlify, providing fast and reliable CDN-based hosting.
-
-The database is hosted on Neon, a scalable Postgres-as-a-Service platform.
-
-Continuous integration and delivery allow smooth updates and maintenance.
-
+- Create, manage, and list shortened URLs  
+- Real-time analytics with dynamic date range filters  
+- Interactive graph visualizations of click data  
+- Secure JWT-based authentication and authorization  
+- Responsive and user-friendly dashboard UI  
